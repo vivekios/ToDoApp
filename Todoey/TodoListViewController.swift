@@ -11,10 +11,12 @@ import UIKit
 class TodoListViewController: UITableViewController {
 
     var itemArray = ["Find Mike", "Buy Eggs", "Destroy Doroemon"]
-    
+    var defaults = UserDefaults()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if let item = defaults.array(forKey: "ToDoKey") as? [String] {
+            itemArray = item
+        }
     }
     
     // MARK: Tableview datasource methods.
@@ -49,6 +51,7 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             print("success")
             self.itemArray.append(textField.text!)
+            self.defaults.set(self.itemArray, forKey: "ToDoKey")
             self.tableView.reloadData()
         }
         alert.addTextField { (alertTextField) in
