@@ -21,15 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print(Realm.Configuration.defaultConfiguration.fileURL)
         
-        let data = Data()
-        data.name = "Vivek Singh"
-        data.age = 25
+        
         
         do {
             let realm = try Realm()
-            try realm.write {
-                realm.add(data)
-            }
         } catch  {
             print("Error while installing realm, \(error)")
         }
